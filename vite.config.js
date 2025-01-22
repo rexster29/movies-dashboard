@@ -25,7 +25,7 @@ export default defineConfig({
     },
     outDir: './build',
     emptyOutDir: true,
-    chunkSizeWarningLimit: 1000, // Set the limit in KB
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -37,6 +37,20 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['node_modules', 'dist', 'build'], // Exclude directories from being watched
+    exclude: ['node_modules', 'dist', 'build'],
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/setupTests.js'],
+    include: ['src/**/*.{test,spec}.{js,jsx}'],
+    css: true,
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/setupTests.js',
+      ],
+    },
   },
 })
